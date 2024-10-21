@@ -19,13 +19,12 @@ public class Order {
     private String username;
     private String status;
 
-    // Use a list to store product IDs
     @ElementCollection
     @CollectionTable(name = "order_products", joinColumns = @JoinColumn(name = "order_id"))
     @Column(name = "product_id")
     private List<Long> productIds;
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }

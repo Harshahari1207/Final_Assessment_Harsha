@@ -31,7 +31,6 @@ const Home = () => {
   ]);
   const [cart, setCart] = useState([]);
 
-  // Fetch products only when isFormVisible changes (once on mount and when toggling form visibility)
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -44,22 +43,20 @@ const Home = () => {
       }
     };
     fetchProducts();
-  }, [isFormVisible]); // Only run when isFormVisible changes
+  }, [isFormVisible]);
 
-  // Initialize the cart from localStorage only once (on mount)
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
-      setCart(JSON.parse(storedCart)); // Initialize cart from localStorage
+      setCart(JSON.parse(storedCart));
     }
-  }, []); // Empty dependency array to ensure this runs only once when the component mounts
+  }, []);
 
-  // Update localStorage when the cart changes
   useEffect(() => {
     if (cart.length > 0) {
-      localStorage.setItem("cart", JSON.stringify(cart)); // Update localStorage on cart change
+      localStorage.setItem("cart", JSON.stringify(cart));
     }
-  }, [cart]); // Run this effect whenever cart changes
+  }, [cart]);
 
   const handleCloseForm = () => {
     console.log("Form closed");
@@ -111,7 +108,14 @@ const Home = () => {
 
             {cart.length > 0 && (
               <div className="col-md-4">
-                <Cart cartItems={cart} />
+                <Cart
+                  cartItems={cart}
+                  username={
+                    localStorage.getItem("username")
+                      ? localStorage.getItem("username")
+                      : ""
+                  }
+                />
               </div>
             )}
           </div>

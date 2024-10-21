@@ -16,7 +16,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long customerId;
+    private String username;
     private String status;
 
     // Use a list to store product IDs
@@ -34,12 +34,12 @@ public class Order {
         this.id = id;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getStatus() {

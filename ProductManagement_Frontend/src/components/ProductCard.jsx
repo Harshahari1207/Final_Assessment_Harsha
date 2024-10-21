@@ -1,12 +1,12 @@
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, addToCart }) => {
     return (
-      <div className="col-md-4 mb-4">
-        <div className="card">
+      <div className="col-md-4 mb-4 product-card">
+        <div className="card h-100">
           <div className="card-body">
             <h5 className="card-title">{product.name}</h5>
             <p className="card-text">{product.description}</p>
             <p className="card-text">
-              <strong>{product.price}</strong>
+              <strong>₹{product.price}</strong>
             </p>
             <p className="card-text">
               <strong>Availability: </strong>
@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
               )}
             </p>
             {product.availability ? (
-              <a href="#" className="btn btn-primary">
+              <a href="#" className="btn btn-primary" onClick={() => addToCart(product)}>
                 Add to Cart
               </a>
             ) : (

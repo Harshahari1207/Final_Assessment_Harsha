@@ -10,7 +10,10 @@
 .hero{
   min-height: 50vh;
 }
-
+/* Product card styles */
+.product-card{
+  height: 250px;
+}
 
 /* AddProductForm styles */
 

@@ -49,13 +49,17 @@ const Register = () => {
       password: formData.password,
       address: formData.address,
     };
-    const response = await axios.post(
-      "http://localhost:8081/users/register",
-      data
-    );
-    if (response.status === 201) {
-      console.log(response);
-      history("/login");
+    try {
+      const response = await axios.post(
+        "http://localhost:8081/users/register",
+        data
+      );
+      if (response.status === 201) {
+        console.log(response);
+        history("/login");
+      }
+    } catch (error) {
+      console.error("Error registering user:", error);
     }
   };
 

@@ -1,23 +1,23 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import AddProductForm from "./AddProductForm";
 import ProductCard from "./ProductCard";
 import Cart from "./Cart";
 import axios from "axios";
+
 const Home = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [products, setProducts] = useState([
     {
       id: 120,
-      name: "Product 1",
-      description: "This is the description for product 1",
+      name: "Shoe",
+      description: "Nyke Shoe",
       price: "10",
       availability: true,
     },
     {
       id: 210,
-      name: "Product 2",
-      description: "This is the description for product 2",
+      name: "Table",
+      description: "Study Table",
       price: "20",
       availability: false,
     },
@@ -31,6 +31,7 @@ const Home = () => {
   ]);
   const [cart, setCart] = useState([]);
 
+  // Fetch products only when isFormVisible changes (once on mount and when toggling form visibility)
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -42,17 +43,24 @@ const Home = () => {
         console.error("Error fetching products:", error);
       }
     };
-  }, [isFormVisible]);
+    fetchProducts();
+  }, [isFormVisible]); // Only run when isFormVisible changes
 
+  // Initialize the cart from localStorage only once (on mount)
   useEffect(() => {
-    if(!localStorage.getItem("cart")) {
-    localStorage.setItem("cart", JSON.stringify(cart));
-    }
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
-      setCart(JSON.parse(storedCart));
+      setCart(JSON.parse(storedCart)); // Initialize cart from localStorage
     }
-  }, [cart]);
+  }, []); // Empty dependency array to ensure this runs only once when the component mounts
+
+  // Update localStorage when the cart changes
+  useEffect(() => {
+    if (cart.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(cart)); // Update localStorage on cart change
+    }
+  }, [cart]); // Run this effect whenever cart changes
+
   const handleCloseForm = () => {
     console.log("Form closed");
     setIsFormVisible(!isFormVisible);
@@ -60,11 +68,10 @@ const Home = () => {
 
   const addToCart = (product) => {
     const updatedCart = [...cart, product];
-    setCart(updatedCart);
-
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCart(updatedCart); // Update cart state
     console.log("Product added to cart:", product);
   };
+
   return (
     <div className="main">
       {isFormVisible && <AddProductForm handleClose={handleCloseForm} />}

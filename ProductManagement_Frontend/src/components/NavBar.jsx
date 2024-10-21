@@ -6,7 +6,7 @@ const NavBar = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    history("/login"); 
+    history("/"); 
   };
 
   return (

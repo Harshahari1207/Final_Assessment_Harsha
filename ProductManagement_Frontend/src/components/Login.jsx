@@ -18,19 +18,23 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
+    try{
 
-    const response = await axios.post(
-      "http://localhost:8081/users/login",
-      formData
-    );
-    if ((response.status = 200)) {
-      history("/");
-    } else {
-      alert("Invalid credentials");
+        const response = await axios.post(
+          "http://localhost:8081/users/login",
+          formData
+        );
+        if ((response.status = 200)) {
+          history("/");
+        } else {
+          alert("Invalid credentials");
+        }
+        localStorage.setItem("username", formData.username);
+        localStorage.setItem("token", response.data.token);
+        console.log(response);
+    }catch (error) {
+      console.error("Error dunring login:", error);
     }
-    localStorage.setItem("username", formData.username);
-    localStorage.setItem("token", response.data.token);
-    console.log(response);
   };
 
   return (

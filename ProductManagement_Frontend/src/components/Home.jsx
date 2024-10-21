@@ -45,7 +45,13 @@ const Home = () => {
   }, [isFormVisible]);
 
   useEffect(() => {
+    if(!localStorage.getItem("cart")) {
     localStorage.setItem("cart", JSON.stringify(cart));
+    }
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
   }, [cart]);
   const handleCloseForm = () => {
     console.log("Form closed");

@@ -5,3 +5,35 @@
   background: rgb(238,174,202);
   background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
 }
+
+/* Home page styles */
+.hero{
+  min-height: 50vh;
+}
+
+
+/* AddProductForm styles */
+
+.addproduct-form-container{
+  top: 0;
+  position: fixed;
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+/* Close button styling */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #000;
+  cursor: pointer;
+  outline: none;
+}

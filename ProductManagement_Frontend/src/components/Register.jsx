@@ -55,7 +55,7 @@ const Register = () => {
     );
     if (response.status === 201) {
       console.log(response);
-      history("/");
+      history("/login");
     }
   };
 

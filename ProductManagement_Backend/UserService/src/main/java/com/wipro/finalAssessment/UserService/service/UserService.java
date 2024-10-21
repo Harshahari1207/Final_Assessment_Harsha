@@ -16,12 +16,12 @@ public class UserService {
         return userRepository.save(user);
     }
     
-    public User getUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    public User getUserByUsername(String username) {
+    		return userRepository.findByUsername(username).orElse(null);
     }
 
-    public User updateUserProfile(Long id, User user) {
-        User existingUser = getUserById(id);
+    public User updateUserProfile(String username, User user) {
+        User existingUser = getUserByUsername(username);
         existingUser.setEmail(user.getEmail());
         existingUser.setAddress(user.getAddress());
         

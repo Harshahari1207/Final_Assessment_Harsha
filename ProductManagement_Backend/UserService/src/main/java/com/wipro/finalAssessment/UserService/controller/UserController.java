@@ -32,7 +32,7 @@ public class UserController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody User user) {
-		User foundUser = userService.getUserById(user.getUserId());
+		User foundUser = userService.getUserByUsername(user.getUsername());
 		System.out.println(foundUser);
 		if (foundUser != null) {
 			String token = "ProductManagement";

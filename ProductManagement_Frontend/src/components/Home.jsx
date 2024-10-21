@@ -1,33 +1,48 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import AddProductForm from "./AddProductForm";
 import ProductCard from "./ProductCard";
-
+import axios from "axios";
 const Home = () => {
-  const [isFormVisible, setIsFormVisible] = useState(true);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+    const[products, setProducts] = useState([
+        {
+          id: 120,
+          name: "Product 1",
+          description: "This is the description for product 1",
+          price: "10",
+          availability: true,
+        },
+        {
+          id: 210,
+          name: "Product 2",
+          description: "This is the description for product 2",
+          price: "20",
+          availability: false,
+        },
+        {
+          id: 310,
+          name: "Dhoni's Jersey",
+          description: "Book of Dhoni",
+          price: "30",
+          availability: true,
+        },
+      ]);
 
-  const products = [
-    {
-      id: 1,
-      name: "Product 1",
-      description: "This is the description for product 1",
-      price: "$10.00",
-      available: true,
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      description: "This is the description for product 2",
-      price: "$20.00",
-      available: false,
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      description: "This is the description for product 3",
-      price: "$30.00",
-      available: true,
-    },
-  ];
+      useEffect(() => {
+        const fetchProducts = async () => {
+          try {
+            console.log("Form visible:", isFormVisible);
+            const response = await axios.get("http://localhost:8082/products");
+            console.log(response);
+            setProducts((prevProducts) => [...prevProducts, ...response.data]);
+          } catch (error) {
+            console.error("Error fetching products:", error);
+          }
+        };
+    
+        fetchProducts();
+      }, [isFormVisible]);
 
   const handleCloseForm = () => {
     console.log("Form closed");

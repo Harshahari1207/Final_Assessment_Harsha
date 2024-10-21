@@ -10,13 +10,13 @@ const ProductCard = ({ product }) => {
             </p>
             <p className="card-text">
               <strong>Availability: </strong>
-              {product.available ? (
+              {product.availability ? (
                 <span className="text-success">In Stock</span>
               ) : (
                 <span className="text-danger">Out of Stock</span>
               )}
             </p>
-            {product.available ? (
+            {product.availability ? (
               <a href="#" className="btn btn-primary">
                 Add to Cart
               </a>
